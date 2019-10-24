@@ -121,7 +121,7 @@ def readJSONlog(logfile, current_data, filterfunction = (lambda x: True), custom
                     JSONrecords[index]["data"]["last_time"]=_rec["asctime"]
                     JSONrecords[index]["data"]["message"]=_rec["message"]
                     JSONrecords[index]["data"]["total_calls"] = int(JSONrecords[index]["data"]["end_count"]/JSONrecords[index]["data"]["start_count"])
-                    JSONrecords[index]["data"]["total_time"] = str(date_diff(JSONrecords[index]["data"]["last_time"],JSONrecords[index]["data"]["first_time"]))
+                    JSONrecords[index]["data"]["total_time"] = date_diff(JSONrecords[index]["data"]["last_time"],JSONrecords[index]["data"]["first_time"])
 
             if(index==None):
                 JSONrecords.append(rec)
@@ -131,7 +131,7 @@ def date_diff(d1, d2):
     datetimeFormat = '%Y-%m-%d %H:%M:%S,%f'
     diff = datetime.datetime.strptime(d1, datetimeFormat)\
          - datetime.datetime.strptime(d2, datetimeFormat)
-    return diff
+    return diff.total_seconds()
 
 
 class JSONFormatter(Formatter):

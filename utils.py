@@ -13,8 +13,6 @@ def ListLines(file, range_json, prop='r'):
             data = json.load(json_file)
         for x, line in enumerate(itertools.islice(lines, data["current"], max)):
             new_lines.append(line)
-            print(line)
-            print(x)
             count = x
 
         data["current"] = max if (data["current"]>=max) else data["current"]+count+1
